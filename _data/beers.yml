@@ -1,0 +1,29 @@
+- name: All Saints Amber Ale
+  style: Amber Ale
+  abv: 5.2
+  description: A malty, balanced amber ale with notes of caramel and toasted bread, brewed for the feast of All Saints.
+  status: Available
+
+- name: Venerable Dark Stout
+  style: Stout
+  abv: 6.8
+  description: A rich, roasted stout with hints of dark chocolate and coffee, honoring the venerable saints of the faith.
+  status: Available
+
+- name: Blessed Hefeweizen
+  style: Hefeweizen
+  abv: 4.9
+  description: A refreshing wheat beer with fruity esters and clove spice, perfect for summer feast days.
+  status: Seasonal
+
+- name: Sanctified Saison
+  style: Saison
+  abv: 6.1
+  description: A dry, spicy farmhouse ale brewed with wild yeast and aged hops, inspired by the monastic brewing tradition.
+  status: Available
+
+- name: Martyr's IPA
+  style: India Pale Ale
+  abv: 6.5
+  description: A bold, hoppy IPA with citrus and pine aromas, brewed to honor those who gave their lives for the faith.
+  status: Coming Soon
