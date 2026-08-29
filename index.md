@@ -14,6 +14,7 @@ We encourage you to visit this page regularly for updates regarding our brewing 
 
 ## Our Beers
 
+{% if site.data.beers %}
 {% assign available = site.data.beers | where: "status", "Available" %}
 {% assign seasonal = site.data.beers | where: "status", "Seasonal" %}
 {% assign coming_soon = site.data.beers | where: "status", "Coming Soon" %}
@@ -46,4 +47,8 @@ We encourage you to visit this page regularly for updates regarding our brewing 
 {%- for beer in coming_soon %}
 | **{{ beer.name }}** | {{ beer.style }} | {{ beer.abv }}% | {{ beer.description }} |
 {%- endfor %}
+{% endif %}
+
+{% else %}
+*Our beer list is being updated. Check back soon!*
 {% endif %}
