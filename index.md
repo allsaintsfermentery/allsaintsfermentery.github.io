@@ -23,8 +23,9 @@ We encourage you to visit this page regularly for updates regarding our brewing 
 
 | Beer | Style | ABV | Description |
 |------|-------|-----|-------------|
-{% for beer in available %}| **{{ beer.name }}** | {{ beer.style }} | {{ beer.abv }}% | {{ beer.description }} |
-{% endfor %}
+{%- for beer in available %}
+| **{{ beer.name }}** | {{ beer.style }} | {{ beer.abv }}% | {{ beer.description }} |
+{%- endfor %}
 {% endif %}
 
 {% if seasonal.size > 0 %}
@@ -32,8 +33,9 @@ We encourage you to visit this page regularly for updates regarding our brewing 
 
 | Beer | Style | ABV | Description |
 |------|-------|-----|-------------|
-{% for beer in seasonal %}| **{{ beer.name }}** | {{ beer.style }} | {{ beer.abv }}% | {{ beer.description }} |
-{% endfor %}
+{%- for beer in seasonal %}
+| **{{ beer.name }}** | {{ beer.style }} | {{ beer.abv }}% | {{ beer.description }} |
+{%- endfor %}
 {% endif %}
 
 {% if coming_soon.size > 0 %}
@@ -41,6 +43,7 @@ We encourage you to visit this page regularly for updates regarding our brewing 
 
 | Beer | Style | ABV | Description |
 |------|-------|-----|-------------|
-{% for beer in coming_soon %}| **{{ beer.name }}** | {{ beer.style }} | {{ beer.abv }}% | {{ beer.description }} |
-{% endfor %}
+{%- for beer in coming_soon %}
+| **{{ beer.name }}** | {{ beer.style }} | {{ beer.abv }}% | {{ beer.description }} |
+{%- endfor %}
 {% endif %}
