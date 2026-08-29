@@ -8,7 +8,6 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
   sync:
@@ -36,33 +35,17 @@ jobs:
 
           python3 .github/scripts/sync_beers.py "_data/beers.yml" $repos
 
-      - name: Commit updated beer inventory and open PR
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit updated beer inventory
         run: |
           set -euo pipefail
 
-          base_branch="main"
-          branch="chore/sync-beer-inventory"
-          title="chore: sync beer inventory from recipe repositories"
-          body="Automated update to \`_data/beers.yml\` from recipe repositories."
-
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin "$base_branch"
-          git switch -C "$branch" "origin/$base_branch"
           git add _data/beers.yml
           if git diff --cached --quiet; then
             echo "No changes to _data/beers.yml — nothing to commit."
             exit 0
           fi
 
-          git commit -m "$title"
-          git push --force origin "HEAD:$branch"
-
-          pr_number=$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$branch" --state open --json number --jq '.[0].number // empty')
-          if [ -n "$pr_number" ]; then
-            gh pr edit "$pr_number" --repo "$GITHUB_REPOSITORY" --title "$title" --body "$body"
-          else
-            gh pr create --repo "$GITHUB_REPOSITORY" --base "$base_branch" --head "$branch" --title "$title" --body "$body"
-          fi
+          git commit -m "chore: sync beer inventory from recipe repositories"
+          git push origin HEAD:"${{ github.ref_name }}"
