@@ -1,0 +1,30 @@
+# beer.yml — Recipe Repository Schema
+#
+# Place this file at the root of any repository that has the "recipe" topic.
+# The sync-beers workflow will discover this file automatically and include
+# the beer(s) in the All Saints Fermentery website inventory.
+#
+# Required fields: name, style, abv, description, status
+# status must be one of: Available | Seasonal | Coming Soon
+#
+# A repository may describe a single beer or a list of beers.
+
+# Single-beer example:
+name: Example Pale Ale
+style: American Pale Ale
+abv: 5.0
+description: A crisp, hoppy pale ale brewed for the feast of a beloved saint.
+status: Available
+
+# Multi-beer example (use a YAML list):
+# - name: Example Pale Ale
+#   style: American Pale Ale
+#   abv: 5.0
+#   description: A crisp, hoppy pale ale brewed for the feast of a beloved saint.
+#   status: Available
+#
+# - name: Example Dark Lager
+#   style: Dark Lager
+#   abv: 4.8
+#   description: A smooth, malty lager with notes of bread and light caramel.
+#   status: Seasonal
