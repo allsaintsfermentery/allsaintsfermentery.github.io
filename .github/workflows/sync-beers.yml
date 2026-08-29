@@ -36,13 +36,31 @@ jobs:
 
           python3 .github/scripts/sync_beers.py "_data/beers.yml" $repos
 
-      - name: Create pull request for updated beer inventory
-        uses: peter-evans/create-pull-request@v8.1.1
-        with:
-          add-paths: _data/beers.yml
-          branch: chore/sync-beer-inventory
-          commit-message: "chore: sync beer inventory from recipe repositories"
-          delete-branch: true
-          title: "chore: sync beer inventory from recipe repositories"
-          body: |
-            Automated update to `_data/beers.yml` from recipe repositories.
+      - name: Commit updated beer inventory and open PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          branch="chore/sync-beer-inventory"
+          title="chore: sync beer inventory from recipe repositories"
+          body="Automated update to \`_data/beers.yml\` from recipe repositories."
+
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add _data/beers.yml
+          if git diff --cached --quiet; then
+            echo "No changes to _data/beers.yml — nothing to commit."
+            exit 0
+          fi
+
+          git switch -C "$branch"
+          git commit -m "$title"
+          git push --force-with-lease origin "HEAD:$branch"
+
+          pr_number=$(gh pr list --head "$branch" --state open --json number --jq '.[0].number')
+          if [ -n "$pr_number" ]; then
+            gh pr edit "$pr_number" --title "$title" --body "$body"
+          else
+            gh pr create --base main --head "$branch" --title "$title" --body "$body"
+          fi
