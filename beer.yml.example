@@ -7,24 +7,19 @@
 # Required fields: name, style, abv, description, status
 # status must be one of: Available | Seasonal | Coming Soon
 #
-# A repository may describe a single beer or a list of beers.
+# Use a YAML list (recommended, supports multiple beers per repo):
 
-# Single-beer example:
-name: Example Pale Ale
-style: American Pale Ale
-abv: 5.0
-description: A crisp, hoppy pale ale brewed for the feast of a beloved saint.
-status: Available
+- name: Example Pale Ale
+  style: American Pale Ale
+  abv: 5.0
+  description: A crisp, hoppy pale ale brewed for the feast of a beloved saint.
+  status: Available
 
-# Multi-beer example (use a YAML list):
-# - name: Example Pale Ale
-#   style: American Pale Ale
-#   abv: 5.0
-#   description: A crisp, hoppy pale ale brewed for the feast of a beloved saint.
-#   status: Available
+# A single-beer mapping (without the leading "- ") is also accepted and will
+# be normalized to a list automatically by the sync workflow:
 #
-# - name: Example Dark Lager
-#   style: Dark Lager
-#   abv: 4.8
-#   description: A smooth, malty lager with notes of bread and light caramel.
-#   status: Seasonal
+# name: Example Pale Ale
+# style: American Pale Ale
+# abv: 5.0
+# description: A crisp, hoppy pale ale brewed for the feast of a beloved saint.
+# status: Available
