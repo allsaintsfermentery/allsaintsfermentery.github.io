@@ -58,4 +58,7 @@ jobs:
             --base "${{ github.ref_name }}" \
             --head "$BRANCH"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # GITHUB_TOKEN cannot create PRs when the org-level setting
+          # "Allow GitHub Actions to create and approve pull requests" is disabled.
+          # A PAT with `repo` scope from a human account is used instead.
+          GH_TOKEN: ${{ secrets.PAT }}
