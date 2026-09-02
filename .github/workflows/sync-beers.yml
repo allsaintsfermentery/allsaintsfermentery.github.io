@@ -27,12 +27,9 @@ jobs:
           mkdir -p _data
 
           # Find all public repositories in the org created from the recipe template
-          repos=$(gh api \
-            --paginate \
-            -H "Accept: application/vnd.github+json" \
-            "/orgs/${ORG}/repos?type=public&per_page=100" \
-            | jq -r --arg tmpl "${ORG}/recipe" \
-              '.[] | select(.template_repository.full_name == $tmpl) | .name' \
+          repos=$(gh repo list ${ORG} \
+            --json name,templateRepository \
+            --jq '.[] | select(.templateRepository.name == "recipe") | .name' \
             | tr '\n' ' ')
 
           python3 .github/scripts/sync_beers.py "_data/beers.yml" $repos
