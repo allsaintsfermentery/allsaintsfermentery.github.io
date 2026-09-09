@@ -1,3 +1,9 @@
-theme: minima
+remote_theme: jekyll/minima
 title: All Saints Fermentery
 description: Stat crux dum volvitur orbis
+minima:
+  skin: auto
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-remote-theme
